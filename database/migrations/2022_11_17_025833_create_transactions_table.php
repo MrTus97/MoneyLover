@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->smallIncrements('id');
             $table->string('name', 100);
+            $table->foreign('group_id')->
             $table->string('description', 255)->nullable();
             $table->string('icon')->nullable();
             // 0 : Income, 1 Outcome, 2: own
