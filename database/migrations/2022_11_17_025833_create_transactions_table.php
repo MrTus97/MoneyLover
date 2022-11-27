@@ -15,14 +15,16 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->smallIncrements('id');
-            $table->string('name', 100);
-            $table->foreign('group_id')->
+            $table->foreignId('group_id')->constrained();
+            $table->bigInteger('amount')->default(0);
             $table->string('description', 255)->nullable();
+            $table->string('with', 100)->nullable();
+            $table->string('location', 255)->nullable();
+            $table->date('alert')->nullable();
+            $table->json('images')->nullable();
+            $table->boolean('is_count_report')->nullable();
             $table->string('icon')->nullable();
-            // 0 : Income, 1 Outcome, 2: own
-            $table->unsignedTinyInteger('type')->default(0);
             $table->foreignId('wallet_id')->constrained();
-            $table->foreignId('parrent_id')->constrained('groups')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

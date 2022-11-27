@@ -21,7 +21,7 @@ return new class extends Migration
             // 0 : Income, 1 Outcome, 2: own
             $table->unsignedTinyInteger('type')->default(0);
             $table->foreignId('wallet_id')->constrained();
-            $table->foreignId('parrent_id')->constrained('groups')->nullable();
+            $table->foreignId('parrent_id')->nullable()->constrained('groups');
             $table->timestamps();
             $table->softDeletes();
         });

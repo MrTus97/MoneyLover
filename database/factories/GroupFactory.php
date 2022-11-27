@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Group;
 use App\Models\Wallet;
+use Exception;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,13 +19,19 @@ class GroupFactory extends Factory
      */
     public function definition()
     {
+        $parrentId = null;
+        try {
+            $parrentId = Group::all()->random()->id;
+        } catch(Exception $e) {
+            $parrentId = null;
+        }
         return [
             'name' => fake()->unique()->name(),
             'description' =>  fake()->text(),
-            'icon' => fake()->link(),
+            'icon' => fake()->name(),
             'type' => fake()->numberBetween(0, 2),
-            'walled_id' => Wallet::all()->random()->id,
-            'parrent_id' => Group::all()->random()->id,
+            'wallet_id' => Wallet::all()->random()->id,
+            'parrent_id' => $parrentId,
         ];
     }
 }
